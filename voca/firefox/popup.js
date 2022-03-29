@@ -22,23 +22,6 @@ function translate(){
 	var sourceText = document.getElementById("source-lang-text").value;
 	var sourceLang = sourceSelect.value;
 
-	console.log(sourceText);
-	console.log(document.getElementById("source-lang-text"));
-
-	console.log(settings.API+":"+settings.PORT+"/translate");
-
-	let payload = {
-		method: "POST",
-		body: JSON.stringify({
-			q: sourceText,
-			source: sourceSelect.value, //TODO detect beforehand to save time
-			target: targetSelect.value
-		}),
-		//mode: 'no-cors',
-		headers: {"Content-type": "application/json"}
-	};
-	console.log(payload);
-
 	fetch(settings.API+":"+settings.PORT+"/translate", {
 		method: "POST",
 		body: JSON.stringify({
@@ -102,8 +85,6 @@ document.addEventListener("DOMContentLoaded", function(){
 		applySettings(settings);
 		loadLanguages();
 	});
-
-	//TODO fill language select ui
 
 	//TODO set languages and allow that to overwrite settings
 
