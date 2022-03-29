@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf8">
+		<script src="options.js"></script>
+	</head>
+	<body>
+		<h1>Options Page</h1>
+		<button id="restore-defaults">Restore Defaults</button>
+		<form id="settings-form">
+			<div>
+				<label>API URL</label>
+				<input type="text" id="api-url">
+			</div>
+
+			<div>
+				<label>API Port</label>
+				<input type="number" id="api-port" min="0" max="65535">
+			</div>
+
+			<div>
+				<label>API Key</label>
+				<input type="text" id="api-key">
+			</div>
+
+			<div>
+				<label>Translation Selection Highlight Color</label>
+				<input type="color" id="highlight-color">
+			</div>
+			
+			<div>
+				<label>Translation Hotkey</label>
+				<input type="text" id="translation-hotkey">
+			</div>
+
+			<div>
+				<label>Default Source Language</label>
+				<select id="source-language-select"></select>
+			</div>
+
+			<div>
+				<label>Default Target Language</label>
+				<select id="target-language-select"></select>
+			</div>
+			
+			<button type="submit">Save</button>
+		</form>
+		<a href="https://github.com/LibreTranslate/LibreTranslate#install-and-run">Want to self host LibreTranslate? Get lower latency and offline availability!</a>
+	</body>
+</html>

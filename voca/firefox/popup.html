@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf8">
+		<style>
+			.flex{
+				display:flex;
+				flex-direction:column;
+			}
+			.popup-cont{
+				margin-left:10%;
+				margin-right:10%;
+				display:flex;
+				flex-direction:column;
+			}
+			.popup-row{
+				display:flex;
+				flex-direction:row;
+			}
+			.popup-col{
+				display:flex;
+				flex-direction:column;
+			}
+		</style>
+		<script src="popup.js"></script>
+	</head>
+	<body>
+		<div class="popup-cont">
+			<h1 class="popup-row">Unofficial LibreTranslate Firefox Extension</h1>
+			<div class="popup-row">
+				To translate a passage highlight it with your cursor and hold the Alt key.
+			</div>
+			<div class="popup-row">
+				<div class="flex">
+					<select class="popup-col" id="source-lang">
+					</select>
+					<textarea class="popup-col" id="source-lang-text"></textarea>
+				</div>
+				<div class="flex">
+					<select class="popup-col" id="target-lang">
+					</select>
+					<textarea class="popup-col" id="target-lang-text"></textarea>
+				</div>
+			</div>
+			<div class="popup-row">
+				<div class="flex">
+					<button class="popup-col" id="settings">Extension Settings</button>
+					<button class="popup-col" id="translate-page">Translate Entire Page</button>
+				</div>
+			</div>
+		</div>
+	<body>
+</html>

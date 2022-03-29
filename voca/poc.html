@@ -1,0 +1,111 @@
+<!DOCTYPE>
+<html>
+<head>
+	<meta charset="utf8">
+	<script>
+		//from https://stackoverflow.com/questions/17642799/javascript-jquery-get-selected-texts-container
+		var getSelectionContainer = function() { 
+
+		    if (document.selection){  // IE
+			return document.selection.createRange().parentElement();
+		    }
+
+		    var select = window.getSelection();
+		    if (select.rangeCount > 0) {
+		       return select.getRangeAt(0).startContainer.parentNode;
+		    }
+		};
+
+		//won't work for textarea see https://stackoverflow.com/questions/5379120/get-the-highlighted-selected-text
+		function getSelectionText() {
+		    var text = "";
+		    if (window.getSelection) {
+			text = window.getSelection().toString();
+		    } else if (document.selection && document.selection.type != "Control") {
+			text = document.selection.createRange().text;
+		    }
+		    return text;
+		}
+
+		function translate(q, el, callback){
+			let original = el.innerText;
+			
+			//TODO make sure the query matches word boundaries
+			let transtext = original.replace(q, "TRANSLATION");
+		}
+
+		document.addEventListener("DOMContentLoaded", function(){
+			document.body.onmouseup = function(e){
+				let highlightedText = getSelectionText();
+				let element = getSelectionContainer();
+				console.log(highlightedText);
+				console.log(element);
+			};
+
+			document.body.onkeydown = function(edown){
+				console.log("keydown");
+				console.log(edown);
+				if(edown.altKey || edown.key == "Alt"){
+					edown.preventDefault();
+					let highlightedText = getSelectionText();
+					if(highlightedText == ""){
+						console.log("no selection");
+						return;
+					}
+					let element = getSelectionContainer();
+					console.log(highlightedText);
+					console.log(element);
+
+					//translate
+					let original = element.innerText;
+
+					fetch("http://localhost:5000/translate", {
+						method: "POST",
+						body: JSON.stringify({
+							q: highlightedText,
+							source: "auto", //TODO detect beforehand to save time
+							target: "en"
+						}),
+						headers: {"Content-type": "application/json"}
+					})
+					.then( response => response.json())
+					.then( data => {
+						console.log(data);
+
+						let show = '<span style="background-color:#0FF;">'+data.translatedText+'</span>';
+
+
+						let translated = original.replace(highlightedText, show);
+
+						element.innerHTML = translated;
+
+						document.body.onkeyup = function(eup){
+							console.log("keyup");
+							console.log(eup);
+							if(eup.key == "Alt"){
+								console.log("eup altKey");
+								eup.preventDefault();
+								element.innerText = original;
+							}
+						};
+
+					});
+
+
+						
+
+					
+				}
+			};
+
+			//document.body.onkeyup = function(e){
+				
+			//}
+		});
+	</script>
+</head>
+<body>
+	<p id="p1">Una niña enferma que estaba conectada a un respirador también se hallaba en el interior de la casa cuando el tornado golpeó. La vivienda de un solo piso fue desplazada 30 pies (9 metros) y quedó hecha añicos en la calle.</p>
+	<p id="p2">veni vidi veci</p>
+</body>
+</html>

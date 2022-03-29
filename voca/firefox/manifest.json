@@ -1,0 +1,48 @@
+{
+	"manifest_version": 2,
+	"name": "voca",
+	"version": "0.1",
+	"description": "in place translation to aid language learners with unfamiliar vocabulary",
+	"icons":{
+		"48": "TODO, put image path here"
+	},
+	"content_scripts": [
+		{
+			"matches": ["<all_urls>"],
+			"js": ["content.js"]
+		}
+	],
+	"permissions":[
+		"storage",
+		"webRequest",
+
+		"http://localhost/*",
+		"http://192.168.0.40/*",
+		
+		"https://libretranslate.com/*",
+		"https://libretranslate.de/*",
+		"https://translate.argosopentech.com/*",
+		"https://trans.zillyhuhn.com/*",
+		"https://libretranslate.esmailebob.xyz/*",
+		"https://libretranslate.pussthecat.org/*"
+	],
+	"background": {
+	  	"scripts": ["background.js"]
+	},
+	"browser_action": {
+		"default_icon": "TODO",
+		"default_title": "Voca?",
+		"default_popup": "popup.html"
+	},
+	"options_ui": {
+		"page": "options.html",
+		"browser_style": true,
+		"chrome_style": true
+	},
+	"broswer_specific_settings": {
+		"gecko": {
+			"id": "voca@terraprint.co",
+			"strict_min_version": "57.0"
+		}
+	}
+}
