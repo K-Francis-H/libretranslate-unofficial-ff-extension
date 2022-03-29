@@ -61,6 +61,7 @@ function loadLanguages(){
 	var sourceSelect = document.getElementById("source-lang");
 	var targetSelect = document.getElementById("target-lang");
 
+	//load up the language selects
 	fetch(settings.API+":"+settings.PORT+"/languages", {
 		method: "GET",
 		mode: 'no-cors'
@@ -84,12 +85,15 @@ function loadLanguages(){
 }
 
 document.addEventListener("DOMContentLoaded", function(){
-	
-
+	//button listeners
 	document.getElementById("settings").onclick = function(){
 		browser.runtime.openOptionsPage();
 	};
 
+	document.getElementById("translate-page").onclick = function(){
+		//TODO talk to the tab, get the whole page and translate (probably within the tab)
+	};
+	//load settings
 	browser.storage.local.get(DEFAULT_SETTINGS)
 	.then( res => {
 		settings = res;
