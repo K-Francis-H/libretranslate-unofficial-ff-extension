@@ -1,6 +1,6 @@
 const DEFAULT_SETTINGS = {
-	API: "http://192.168.0.40",
-	PORT: 5001, //5000 is real default...
+	API: "https://translate.argosopentech.com",
+	PORT: 443, //5000 is real default...
 	API_KEY: "",
 	HIGHLIGHT_COLOR: "#00FFFF",
 	TRANSLATION_HOTKEY : "Alt",

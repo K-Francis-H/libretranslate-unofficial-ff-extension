@@ -1,6 +1,6 @@
 const DEFAULT_SETTINGS = {
-	API: "http://192.168.0.40",
-	PORT: 5001, //5000 is real default...
+	API: "https://translate.argosopentech.com",
+	PORT: 443, //5000 is real default...
 	API_KEY: "",
 	HIGHLIGHT_COLOR: "#00FFFF",
 	TRANSLATION_HOTKEY : "Alt",
@@ -66,7 +66,7 @@ function loadStoredValues(){
 
 		})
 		.catch( error => {
-			document.getElementById('api-url').value=error;
+			console.log(error);
 		});
 	});
 
@@ -110,8 +110,19 @@ function saveSettings(){
 	let sourceSelect = document.getElementById('source-language-select');
 	let targetSelect = document.getElementById('target-language-select');
 
-	console.log(sourceSelect.options[sourceSelect.selectedIndex].value);
-	console.log(targetSelect.options[targetSelect.selectedIndex].value);
+	//console.log(sourceSelect.options[sourceSelect.selectedIndex].value);
+	//console.log(targetSelect.options[targetSelect.selectedIndex].value);
+	try{
+		var sourceLang = sourceSelect.options[sourceSelect.selectedIndex].value;
+	}catch(e){
+		var sourceLang = DEFAULT_SETTINGS.SOURCE_LANG
+	}
+
+	try{
+		var targetLang = targetSelect.options[targetSelect.selectedIndex].value;
+	}catch(e){
+		var targetLang = DEFAULT_SETTINGS.TARGET_LANG
+	}
 
 	let settings = {
 		API : document.getElementById('api-url').value,
@@ -119,8 +130,8 @@ function saveSettings(){
 		API_KEY : document.getElementById('api-key').value,
 		HIGHLIGHT_COLOR : document.getElementById('highlight-color').value,
 		TRANSLATION_HOTKEY : document.getElementById('translation-hotkey').value,
-		SOURCE_LANG : sourceSelect.options[sourceSelect.selectedIndex].value,
-		TARGET_LANG : targetSelect.options[targetSelect.selectedIndex].value
+		SOURCE_LANG : sourceLang,
+		TARGET_LANG : targetLang
 	};
 	
 	browser.storage.local.set(settings);

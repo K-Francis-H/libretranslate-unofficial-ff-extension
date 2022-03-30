@@ -1,6 +1,6 @@
 const DEFAULT_SETTINGS = {
-	API: "http://192.168.0.40",
-	PORT: 5001, //5000 is real default...
+	API: "https://translate.argosopentech.com",
+	PORT: 443, //5000 is real default...
 	API_KEY: "",
 	HIGHLIGHT_COLOR: "#00FFFF",
 	TRANSLATION_HOTKEY : "Alt",
@@ -34,12 +34,15 @@ browser.storage.onChanged.addListener(function(changes, type){
 	console.log(changes);
 	console.log(type);
 	if(type == "local"){
-		//merge the changes to our copy
-		//settings = {
-		//	...settings,
-		//	...changes
-		//};
-
+		//tell all of the client tabs to merge the new copy
+		//NOTE changes looks like this:
+		/*{
+			key : {oldValue: "old", newValue: "new"}
+		}*/
+		//whereas the stuff we're updating is just:
+		/*{
+			key : "value"
+		}*/
 
 		ports.forEach( p => {
 			p.postMessage({

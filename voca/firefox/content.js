@@ -10,15 +10,15 @@
 //settings
 
 //defaults
-var settings = {
-	API: "http://192.168.0.40",
-	PORT: 5001, //5000 is real default...
+const settings = {
+	API: "https://translate.argosopentech.com",
+	PORT: 443, //5000 is real default...
 	API_KEY: "",
 	HIGHLIGHT_COLOR: "#00FFFF",
 	TRANSLATION_HOTKEY : "Alt",
 	SOURCE_LANG : "auto",
 	TARGET_LANG : "es"
-}
+};
 /*
 browser.storage.local.get(DEFAULT_SETTINGS)
 .then( (res) => {
