@@ -22,6 +22,9 @@ function translate(){
 	var sourceText = document.getElementById("source-lang-text").value;
 	var sourceLang = sourceSelect.value;
 
+	//abort if nothing to translate
+	if(sourceText.trim() == ''){ return; }
+
 	fetch(settings.API+":"+settings.PORT+"/translate", {
 		method: "POST",
 		body: JSON.stringify({
@@ -99,6 +102,9 @@ document.addEventListener("DOMContentLoaded", function(){
 		settings.TARGET_LANG = lang;
 		//console.log("new target-lang: "+lang);
 		browser.storage.local.set(settings);
+
+		//re-translate anything in the source text box
+		translate();
 	};
 
 	//detect typing end and translate
