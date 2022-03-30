@@ -86,8 +86,22 @@ document.addEventListener("DOMContentLoaded", function(){
 		loadLanguages();
 	});
 
-	//TODO set languages and allow that to overwrite settings
+	//set languages and allow that to overwrite settings (everywhere)
+	document.getElementById("source-lang").onchange = function(){
+		let lang = document.getElementById("source-lang").value;
+		settings.SOURCE_LANG = lang;
+		//console.log("new source-lang: "+lang);
+		browser.storage.local.set(settings);
+	};
 
+	document.getElementById("target-lang").onchange = function(){
+		let lang = document.getElementById("target-lang").value;
+		settings.TARGET_LANG = lang;
+		//console.log("new target-lang: "+lang);
+		browser.storage.local.set(settings);
+	};
+
+	//detect typing end and translate
 	var lastKeyDown = 0;
 	var lastKeyup = 0;
 	document.getElementById("source-lang-text").onkeyup = function(){
@@ -101,5 +115,7 @@ document.addEventListener("DOMContentLoaded", function(){
 	document.getElementById("source-lang-text").onkeydown = function(){
 		lastKeyDown = (new Date().getTime());
 	};
+
+	
 	
 });
