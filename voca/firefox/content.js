@@ -12,8 +12,12 @@
 //defaults
 const settings = getDefaultSettings();
 
-let port = browser.runtime.connect({name: "connect"});
+var port = browser.runtime.connect({name: "connect"});
 port.onMessage.addListener(handleBackgroundMessage);
+port.onDisconnect.addListener( (p) => {
+	console.log("reconnecting to bg.js");
+	port = browser.runtime.connect({name: "connect"});	
+});
 //console.log(port);
 
 
