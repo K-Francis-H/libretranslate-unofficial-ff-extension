@@ -9,7 +9,7 @@
 	"content_scripts": [
 		{
 			"matches": ["<all_urls>"],
-			"js": ["content.js"]
+			"js": ["common.js", "content.js"]
 		}
 	],
 	"permissions":[
@@ -27,7 +27,7 @@
 		"https://libretranslate.pussthecat.org/*"
 	],
 	"background": {
-	  	"scripts": ["background.js"]
+	  	"scripts": ["common.js", "background.js"]
 	},
 	"browser_action": {
 		"default_icon": "TODO",

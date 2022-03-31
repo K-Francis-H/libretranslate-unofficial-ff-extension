@@ -1,4 +1,15 @@
-const DEFAULT_SETTINGS = {
+/*try{
+	importScripts("common.js");
+}catch(e){
+	console.log(e);
+}*/
+
+console.log("from common.js");
+console.log(getDefaultSettings());
+
+const DEFAULT_SETTINGS = getDefaultSettings();
+
+/*{
 	API: "https://translate.argosopentech.com",
 	PORT: 443, //5000 is real default...
 	API_KEY: "",
@@ -6,9 +17,32 @@ const DEFAULT_SETTINGS = {
 	TRANSLATION_HOTKEY : "Alt",
 	SOURCE_LANG : "auto",
 	TARGET_LANG : "es"
-};
+};*/
 
 const ports = [];
+
+//called by popup.js to translate the full page of the active tab
+function activeTabTranslatePage(){
+	console.log("activeTabTranslatePage()");
+	const querying = browser.tabs.query({currentWindow: true, active: true});
+	querying.then(onTabs, function(error){
+		console.log(error);
+	});
+}
+
+function onTabs(tabs){
+	//should only be one with that query...
+	console.log(tabs);
+	if(tabs.length < 1){ return; }
+	let activeTab = tabs[0];
+
+	browser.tabs.sendMessage(
+		activeTab.id,
+		{
+			type: "translatePage"
+		}
+	);
+}
 
 browser.runtime.onMessage.addListener(function(msg){
 	console.log(msg);
@@ -17,9 +51,8 @@ browser.runtime.onMessage.addListener(function(msg){
 browser.runtime.onConnect.addListener( p => {
 	console.log(p);
 	ports[p.sender.tab.id] = p;
-
 	
-	//push latest settigns on connect
+	//push latest settings on connect, content scripts have no way to get them directly
 	browser.storage.local.get(DEFAULT_SETTINGS)
 	.then( (res) => {
 		p.postMessage({
@@ -54,5 +87,3 @@ browser.storage.onChanged.addListener(function(changes, type){
 
 	}
 });
-
-//browser.runtime.

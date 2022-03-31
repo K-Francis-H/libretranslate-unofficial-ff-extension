@@ -1,4 +1,6 @@
-const DEFAULT_SETTINGS = {
+const DEFAULT_SETTINGS = getDefaultSettings();
+
+/*{
 	API: "https://translate.argosopentech.com",
 	PORT: 443, //5000 is real default...
 	API_KEY: "",
@@ -6,7 +8,7 @@ const DEFAULT_SETTINGS = {
 	TRANSLATION_HOTKEY : "Alt",
 	SOURCE_LANG : "auto",
 	TARGET_LANG : "es"
-};
+};*/
 
 function loadStoredValues(){
 	browser.runtime.sendMessage({

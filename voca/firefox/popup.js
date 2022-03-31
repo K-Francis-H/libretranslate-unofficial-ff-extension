@@ -1,4 +1,6 @@
-const DEFAULT_SETTINGS = {
+const DEFAULT_SETTINGS = getDefaultSettings();
+
+/*{
 	API: "https://translate.argosopentech.com",
 	PORT: 443, //5000 is real default...
 	API_KEY: "",
@@ -6,7 +8,7 @@ const DEFAULT_SETTINGS = {
 	TRANSLATION_HOTKEY : "Alt",
 	SOURCE_LANG : "auto",
 	TARGET_LANG : "es"
-};
+};*/
 
 var settings = DEFAULT_SETTINGS;
 
@@ -70,6 +72,10 @@ function loadLanguages(){
 	});
 }
 
+function onBackgroundPage(page){
+	page.activeTabTranslatePage();
+}
+
 document.addEventListener("DOMContentLoaded", function(){
 	//button listeners
 	document.getElementById("settings").onclick = function(){
@@ -78,7 +84,12 @@ document.addEventListener("DOMContentLoaded", function(){
 
 	document.getElementById("translate-page").onclick = function(){
 		//TODO talk to the tab, get the whole page and translate (probably within the tab)
+		let bgPromise = browser.runtime.getBackgroundPage();
+		bgPromise.then( onBackgroundPage, function(error){
+			console.log(error);
+		});
 	};
+
 	//load settings
 	browser.storage.local.get(DEFAULT_SETTINGS)
 	.then( res => {

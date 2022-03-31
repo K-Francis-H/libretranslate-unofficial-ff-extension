@@ -10,73 +10,36 @@
 //settings
 
 //defaults
-const settings = {
-	API: "https://translate.argosopentech.com",
-	PORT: 443, //5000 is real default...
-	API_KEY: "",
-	HIGHLIGHT_COLOR: "#00FFFF",
-	TRANSLATION_HOTKEY : "Alt",
-	SOURCE_LANG : "auto",
-	TARGET_LANG : "es"
-};
-/*
-browser.storage.local.get(DEFAULT_SETTINGS)
-.then( (res) => {
-	console.log(res);
-	settings = res;
-});
-
-browser.storage.onChanged.addListener(function(changes, type){
-	console.log(changes);
-	console.log(type);
-	if(type == "local"){
-		//merge the changes to our copy
-		settings = {
-			...settings,
-			...changes
-		};
-	}
-});
-*/
-/*
-browser.runtime.onConnect.addListener(function(port){
-	port.onMessage.addListener(function(msg){
-		console.log(msg);
-		if(msg.src = "background.js"){
-			handleBackgroundMessage(msg);
-		}
-	});
-});*/
+const settings = getDefaultSettings();
 
 let port = browser.runtime.connect({name: "connect"});
 port.onMessage.addListener(handleBackgroundMessage);
-console.log(port);
+//console.log(port);
 
 
 function handleBackgroundMessage(msg){
 	console.log(msg);
 	console.log(msg.type == "settingsChanged");
 	if(msg.type == "settingsChanged"){
-		console.log("HERE");
-		//settings = {
-		//	...settings,
-		//	...msg.changes
-		//};
+
 		let keys = Object.keys(msg.changes);
-		console.log(keys);
 		for(let i=0; i < keys.length; i++){
 			settings[keys[i]] = msg.changes[keys[i]].newValue;
 		}
-		console.log("new settings");
-		console.log(settings);
+		//console.log("new settings");
+		//console.log(settings);
 	}
+	//this will be sent as soon as a connection happens, it loads the latest settings
 	else if(msg.type == "settings"){
 		settings = {
 			...settings,
 			...msg.settings
 		};
-		console.log("init settings");
-		console.log(settings);
+		//console.log("init settings");
+		//console.log(settings);
+	}
+	else if(msg.type == "translatePage"){
+		console.log("translatePage");
 	}
 }
 
@@ -151,10 +114,10 @@ document.body.onkeydown = function(edown){
 			element.innerHTML = translated;
 
 			document.body.onkeyup = function(eup){
-				console.log("keyup");
-				console.log(eup);
+				//console.log("keyup");
+				//console.log(eup);
 				if(eup.key == "Alt"){
-					console.log("eup altKey");
+					//console.log("eup altKey");
 					eup.preventDefault();
 					element.innerHTML = originalHTML;
 				}
