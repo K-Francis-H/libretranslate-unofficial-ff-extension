@@ -4,7 +4,7 @@
 	"version": "0.1",
 	"description": "in place translation to aid language learners with unfamiliar vocabulary",
 	"icons":{
-		"48": "TODO, put image path here"
+		"1048": "icons/libtrans_icon_1048_adjusted.png"
 	},
 	"content_scripts": [
 		{
@@ -32,7 +32,10 @@
 	"browser_action": {
 		"default_icon": "TODO",
 		"default_title": "Voca?",
-		"default_popup": "popup.html"
+		"default_popup": "popup.html",
+		"default_icon": {
+			"1048": "icons/libtrans_icon_1048_adjusted.png"
+		}
 	},
 	"options_ui": {
 		"page": "options.html",
