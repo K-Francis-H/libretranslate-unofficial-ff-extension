@@ -21,6 +21,17 @@ const DEFAULT_SETTINGS = getDefaultSettings();
 
 const ports = [];
 
+function findTabPort(ports, tabId){
+	console.log(ports);
+	for(i=0; i < ports.length; i++){
+		//ports is a sparxe array
+		if(ports[i] && ports[i].sender.tab.id == tabId){
+			return ports[i];
+		}
+	}
+	return false;
+}
+
 //called by popup.js to translate the full page of the active tab
 function activeTabTranslatePage(){
 	console.log("activeTabTranslatePage()");
@@ -34,14 +45,29 @@ function onTabs(tabs){
 	//should only be one with that query...
 	console.log(tabs);
 	if(tabs.length < 1){ return; }
+
+	let port = ports[tabs[0].id];//findTabPort(ports, tabs[0].id);
+	if(port !== false){
+		port.postMessage({
+			src: "background.js",
+			type: "translatePage"
+		});
+	}else{
+		console.log("no port connected for active tab.");
+	}
+
+/*
 	let activeTab = tabs[0];
 
+	console.log(activeTab);
+
 	browser.tabs.sendMessage(
-		activeTab.id,
+		activeTab.index,//activeTab.id,
 		{
 			type: "translatePage"
 		}
 	);
+*/
 }
 
 browser.runtime.onMessage.addListener(function(msg){

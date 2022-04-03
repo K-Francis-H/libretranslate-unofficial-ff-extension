@@ -42,8 +42,30 @@ function handleBackgroundMessage(msg){
 		//console.log("init settings");
 		//console.log(settings);
 	}
-	else if(msg.type == "translatePage"){
+	else if(msg.type == "translatePage"){//experimental, not working (pages too big, need to more strategically target visible content)
 		console.log("translatePage");
+		let fulltext = document.body.innerHTML;
+		let url = settings.API+":"+settings.PORT+"/translate";
+
+		console.log(fulltext);
+		console.log(url);
+
+		fetch(url, {
+			method: "POST",
+			body: JSON.stringify({
+				q: fulltext,
+				source: settings.SOURCE_LANG,
+				target: settings.TARGET_LANG,
+				format: "html"
+			}),
+			headers: {"Content-type": "application/json"}
+		})
+		.then( response => response.json())
+		.then( data => {
+			console.log(data);
+			document.body.innerHTML = data.translatedText;
+		})
+		.catch( error => { console.log(error); } );
 	}
 }
 
@@ -99,7 +121,7 @@ document.body.onkeydown = function(edown){
 			method: "POST",
 			body: JSON.stringify({
 				q: highlightedText,
-				source: settings.SOURCE_LANG, //TODO detect beforehand to save time
+				source: settings.SOURCE_LANG,
 				target: settings.TARGET_LANG
 			}),
 			headers: {"Content-type": "application/json"}
