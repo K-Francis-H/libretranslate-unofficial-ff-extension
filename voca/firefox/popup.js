@@ -62,8 +62,8 @@ function reverseTranslate(){
 	var sourceText = document.getElementById("target-lang-text").value;
 	var sourceLang = sourceSelect.value;
 
-	//abort if nothing to translate
-	if(sourceText.trim() == ''){ return; }
+	//abort if nothing to translate, or we'd be attempting to translate to 'Auto'
+	if(sourceText.trim() == '' || sourceLang == 'auto'){ return; }
 
 	fetch(settings.API+":"+settings.PORT+"/translate", {
 		method: "POST",
@@ -165,6 +165,7 @@ document.addEventListener("DOMContentLoaded", function(){
 		console.log(document.getElementById("target-lang-text"));
 
 		//re-translate anything in the source text box
+
 		translate();
 	};
 
