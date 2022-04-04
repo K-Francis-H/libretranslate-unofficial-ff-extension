@@ -1,6 +1,6 @@
 {
 	"manifest_version": 2,
-	"name": "voca",
+	"name": "Unofficial LibreTranslate API",
 	"version": "0.1",
 	"description": "in place translation to aid language learners with unfamiliar vocabulary",
 	"icons":{
@@ -30,8 +30,7 @@
 	  	"scripts": ["common.js", "background.js"]
 	},
 	"browser_action": {
-		"default_icon": "TODO",
-		"default_title": "Voca?",
+		"default_title": "Unofficial LibreTranslate API",
 		"default_popup": "popup.html",
 		"default_icon": {
 			"1048": "icons/libtrans_icon_1048_adjusted.png"
