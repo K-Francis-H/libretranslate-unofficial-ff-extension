@@ -46,6 +46,7 @@ function handleBackgroundMessage(msg){
 		console.log("translatePage");
 		let fulltext = document.body.innerHTML;
 		let url = settings.API+":"+settings.PORT+"/translate";
+		let apikey = settings.API_KEY == "" ? null : settings.API_KEY;
 
 		console.log(fulltext);
 		console.log(url);
@@ -56,7 +57,8 @@ function handleBackgroundMessage(msg){
 				q: fulltext,
 				source: settings.SOURCE_LANG,
 				target: settings.TARGET_LANG,
-				format: "html"
+				format: "html",
+				api_key: apikey
 			}),
 			headers: {"Content-type": "application/json"}
 		})
@@ -117,12 +119,16 @@ document.body.onkeydown = function(edown){
 		console.log(settings.API+":"+settings.PORT+"/translate");
 		let url = settings.API+":"+settings.PORT+"/translate";
 
+		let apikey = settings.API_KEY == "" ? null : settings.API_KEY;
+		
+
 		fetch(url, {
 			method: "POST",
 			body: JSON.stringify({
 				q: highlightedText,
 				source: settings.SOURCE_LANG,
-				target: settings.TARGET_LANG
+				target: settings.TARGET_LANG,
+				api_key: apikey
 			}),
 			headers: {"Content-type": "application/json"}
 		})
