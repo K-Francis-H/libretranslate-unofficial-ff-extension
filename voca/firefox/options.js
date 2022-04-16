@@ -30,7 +30,7 @@ function loadStoredValues(){
 		var sourceLang = res.SOURCE_LANG || DEFAULT_SETTINGS.SOURCE_LANG;
 		var targetLang = res.TARGET_LANG || DEFAULT_SETTINGS.TARGET_LANG;
 
-		console.log(api+":"+port+"/languages");
+		//console.log(api+":"+port+"/languages");
 		
 		fetch(api+":"+port+"/languages", {
 			method: "GET",
@@ -61,7 +61,7 @@ function loadStoredValues(){
 			
 
 			//now set the values to defaults
-			console.log(sourceLang); console.log(targetLang);
+			//console.log(sourceLang); console.log(targetLang);
 
 			sourceSelect.value = sourceLang;
 			targetSelect.value = targetLang;

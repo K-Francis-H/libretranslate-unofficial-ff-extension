@@ -25,7 +25,7 @@ function applySettings(s){
 }
 
 function translate(){
-	console.log("translate")
+	//console.log("translate")
 	var sourceSelect = document.getElementById("source-lang");
 	var targetSelect = document.getElementById("target-lang");
 
@@ -47,7 +47,7 @@ function translate(){
 	})
 	.then( response => response.json())
 	.then( data => {
-		console.log(data);
+		//console.log(data);
 		document.getElementById("target-lang-text").value = data.translatedText;
 	})
 	.catch( error => { console.log(error); throw(error); } );
@@ -77,7 +77,7 @@ function reverseTranslate(){
 	})
 	.then( response => response.json())
 	.then( data => {
-		console.log(data);
+		//console.log(data);
 		document.getElementById("source-lang-text").value = data.translatedText;
 	})
 	.catch( error => { console.log(error); throw(error); } );
@@ -147,7 +147,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
 		//update spellchecker for textbox
 		document.getElementById("source-lang-text").setAttribute("lang", lang);
-		console.log(document.getElementById("source-lang-text"));
+		//console.log(document.getElementById("source-lang-text"));
 
 		if(lang !== "auto"){
 			reverseTranslate();

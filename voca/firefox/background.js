@@ -43,7 +43,7 @@ function activeTabTranslatePage(){
 
 function onTabs(tabs){
 	//should only be one with that query...
-	console.log(tabs);
+	//console.log(tabs);
 	if(tabs.length < 1){ return; }
 
 	let port = ports[tabs[0].id];//findTabPort(ports, tabs[0].id);
@@ -71,11 +71,11 @@ function onTabs(tabs){
 }
 
 browser.runtime.onMessage.addListener(function(msg){
-	console.log(msg);
+	//console.log(msg);
 });
 
 browser.runtime.onConnect.addListener( p => {
-	console.log(p);
+	//console.log(p);
 	ports[p.sender.tab.id] = p;
 	
 	//push latest settings on connect, content scripts have no way to get them directly
@@ -90,8 +90,8 @@ browser.runtime.onConnect.addListener( p => {
 });
 
 browser.storage.onChanged.addListener(function(changes, type){
-	console.log(changes);
-	console.log(type);
+	//console.log(changes);
+	//console.log(type);
 	if(type == "local"){
 		//tell all of the client tabs to merge the new copy
 		//NOTE changes looks like this:

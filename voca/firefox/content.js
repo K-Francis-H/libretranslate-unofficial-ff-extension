@@ -15,7 +15,7 @@ var settings = getDefaultSettings();
 var port = browser.runtime.connect({name: "connect"});
 port.onMessage.addListener(handleBackgroundMessage);
 port.onDisconnect.addListener( (p) => {
-	console.log("reconnecting to bg.js");
+	//console.log("reconnecting to bg.js");
 	port = browser.runtime.connect({name: "connect"});	
 });
 //console.log(port);
@@ -47,13 +47,13 @@ function handleBackgroundMessage(msg){
 		//console.log(settings);
 	}
 	else if(msg.type == "translatePage"){//experimental, not working (pages too big, need to more strategically target visible content)
-		console.log("translatePage");
+		//console.log("translatePage");
 		let fulltext = document.body.innerHTML;
 		let url = settings.API+":"+settings.PORT+"/translate";
 		let apikey = settings.API_KEY == "" ? null : settings.API_KEY;
 
-		console.log(fulltext);
-		console.log(url);
+		//console.log(fulltext);
+		//console.log(url);
 
 		fetch(url, {
 			method: "POST",
@@ -68,7 +68,7 @@ function handleBackgroundMessage(msg){
 		})
 		.then( response => response.json())
 		.then( data => {
-			console.log(data);
+			//console.log(data);
 			document.body.innerHTML = data.translatedText;
 		})
 		.catch( error => { console.log(error); } );
@@ -100,8 +100,8 @@ function getSelectionText() {
 }
 
 document.body.onkeydown = function(edown){
-	console.log("keydown");
-	console.log(edown);
+	//console.log("keydown");
+	//console.log(edown);
 	if(edown.altKey || edown.key == "Alt"){
 		edown.preventDefault();
 		let highlightedText = getSelectionText();
@@ -110,23 +110,23 @@ document.body.onkeydown = function(edown){
 			return;
 		}
 		let element = getSelectionContainer();
-		console.log(highlightedText);
-		console.log(element);
+		//console.log(highlightedText);
+		//console.log(element);
 
 		//translate
 		let originalText = element.innerText;
 		let originalHTML = element.innerHTML;
 
-		console.log(originalText);
-		console.log(originalHTML);
+		//console.log(originalText);
+		//console.log(originalHTML);
 
 		console.log(settings.API+":"+settings.PORT+"/translate");
 		let url = settings.API+":"+settings.PORT+"/translate";
 
 		let apikey = settings.API_KEY == "" ? null : settings.API_KEY;
 
-		console.log("FROM: "+settings.SOURCE_LANG);
-		console.log("TO: "+settings.TARGET_LANG);
+		//console.log("FROM: "+settings.SOURCE_LANG);
+		//console.log("TO: "+settings.TARGET_LANG);
 		
 
 		fetch(url, {
@@ -145,13 +145,13 @@ document.body.onkeydown = function(edown){
 
 			let show = '<span style="background-color:'+settings.HIGHLIGHT_COLOR+';">'+data.translatedText+'</span>';
 
-			console.log(originalText);
+			//console.log(originalText);
 
 			let translated = originalText.replace(highlightedText.trim(), show);
 
-			console.log(translated);
+			//console.log(translated);
 
-			console.log(element);
+			//console.log(element);
 
 			element.innerHTML = translated;
 
