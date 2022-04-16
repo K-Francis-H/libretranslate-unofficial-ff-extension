@@ -10,7 +10,7 @@
 //settings
 
 //defaults
-const settings = getDefaultSettings();
+var settings = getDefaultSettings();
 
 var port = browser.runtime.connect({name: "connect"});
 port.onMessage.addListener(handleBackgroundMessage);
@@ -22,8 +22,9 @@ port.onDisconnect.addListener( (p) => {
 
 
 function handleBackgroundMessage(msg){
-	console.log(msg);
-	console.log(msg.type == "settingsChanged");
+	//console.log(msg);
+	//console.log(msg.type == "settingsChanged");
+	//console.log(msg.type == "settings");
 	if(msg.type == "settingsChanged"){
 
 		let keys = Object.keys(msg.changes);
@@ -35,10 +36,13 @@ function handleBackgroundMessage(msg){
 	}
 	//this will be sent as soon as a connection happens, it loads the latest settings
 	else if(msg.type == "settings"){
-		settings = {
+		//console.log("here?");
+		//console.log(msg.settings);
+		//console.log(settings);
+		settings = msg.settings; /*{
 			...settings,
 			...msg.settings
-		};
+		};*/
 		//console.log("init settings");
 		//console.log(settings);
 	}
@@ -120,6 +124,9 @@ document.body.onkeydown = function(edown){
 		let url = settings.API+":"+settings.PORT+"/translate";
 
 		let apikey = settings.API_KEY == "" ? null : settings.API_KEY;
+
+		console.log("FROM: "+settings.SOURCE_LANG);
+		console.log("TO: "+settings.TARGET_LANG);
 		
 
 		fetch(url, {
@@ -138,10 +145,13 @@ document.body.onkeydown = function(edown){
 
 			let show = '<span style="background-color:'+settings.HIGHLIGHT_COLOR+';">'+data.translatedText+'</span>';
 
+			console.log(originalText);
 
 			let translated = originalText.replace(highlightedText.trim(), show);
 
 			console.log(translated);
+
+			console.log(element);
 
 			element.innerHTML = translated;
 
