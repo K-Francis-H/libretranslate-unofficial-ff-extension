@@ -16,6 +16,8 @@
 		"storage",
 		"webRequest",
 
+		"https://translate.terraprint.co/*",
+
 		"http://localhost/*",
 		"http://192.168.0.40/*",
 		

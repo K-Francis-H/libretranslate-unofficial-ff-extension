@@ -186,10 +186,5 @@ document.body.onkeydown = function(edown){
 
 		})
 		.catch( error => { console.log(error); throw(error); } );
-
-
-			
-
-		
 	}
 };
