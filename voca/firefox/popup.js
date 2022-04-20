@@ -107,7 +107,8 @@ function loadLanguages(){
 
 		sourceSelect.value = settings.SOURCE_LANG;
 		targetSelect.value = settings.TARGET_LANG;
-	});
+	})
+	.catch( error => { console.log(error); throw(error); } );
 }
 
 function onBackgroundPage(page){

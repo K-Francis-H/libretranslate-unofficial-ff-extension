@@ -73,26 +73,6 @@ function loadStoredValues(){
 		});
 	});
 
-	/*browser.storage.sync.get('api_port')
-	.then( (res) => {
-		document.getElementById('api-port').value = res.api_port || DEFAULT_SETTINGS.PORT;
-	});
-
-	browser.storage.sync.get('highlight_color')
-	.then( (res) => {
-		document.getElementById('highlight-color').value = res.highlight_color || DEFAULT_SETTINGS.HIGHLIGHT_COLOR;
-	});
-
-	browser.storage.sync.get('translation_hotkey')
-	.then( (res) => {
-		document.getElementById('translation-hotkey').value = res.translation_hotkey || DEFAULT_SETTINGS.TRANSLATION_HOTKEY;
-	});*/
-
-	/*browser.storage.sync.get('source_lang')
-	.then( (res) => {
-		document.getElementById('source-language-select').value = res.api_url || DEFAULT_SETTINGS.API
-	});*/
-
 	//document.getElementById("api-url").value = "helllo!";
 
 	//setup listeners for color changes
@@ -120,6 +100,8 @@ function restoreDefaults(){
 	document.getElementById('translation-hotkey').value = DEFAULT_SETTINGS.TRANSLATION_HOTKEY;
 	document.getElementById('source-language-select').value = DEFAULT_SETTINGS.SOURCE_LANG;
 	document.getElementById('target-language-select').value = DEFAULT_SETTINGS.TARGET_LANG;
+
+	//saveSettings();
 }
 
 function saveSettings(){

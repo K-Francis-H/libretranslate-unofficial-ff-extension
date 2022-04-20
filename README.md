@@ -9,7 +9,7 @@ If you are downloading or cloning this repo then you will need to [load this as 
 
 Basically goto [about:debugging](about:debugging) On the left hand side click the menu option: **This Firefox** then click the button near the top with label **Load Temporary Add-on** and then navigate to and select the *manifest.json* file for this repo.
 
-This Add-on is not yet available on the [Firefox Add-ons Marketplace](https://addons.mozilla.org). Once it is I will provide a link to the Add-on listing here.
+This Add-on is available on the [Firefox Add-ons Marketplace](https://addons.mozilla.org/en-US/firefox/addon/open-libretranslate-addon/).
 
 ### Configuring the LibreTranslate API
 
@@ -35,7 +35,7 @@ Clicking the extension icon on the toolbar displays a popup. The popup contains 
 
 ![Popup Translation Box](/screenshots/ulte_popup.png)
 
-## Full Page Translation
+### Full Page Translation
 
 This feature is not yet implemented.
 
