@@ -25,6 +25,7 @@ function loadStoredValues(){
 		document.getElementById('api-port').value = port;
 		document.getElementById('api-key').value = res.API_KEY || DEFAULT_SETTINGS.API_KEY;
 		document.getElementById('highlight-color').value = res.HIGHLIGHT_COLOR || DEFAULT_SETTINGS.HIGHLIGHT_COLOR;
+		document.getElementById('text-color').value = res.TEXT_COLOR || DEFAULT_SETTINGS.TEXT_COLOR;
 		document.getElementById('translation-hotkey').value = res.TRANSLATION_HOTKEY || DEFAULT_SETTINGS.TRANSLATION_HOTKEY;
 		
 		var sourceLang = res.SOURCE_LANG || DEFAULT_SETTINGS.SOURCE_LANG;
@@ -94,6 +95,18 @@ function loadStoredValues(){
 
 	//document.getElementById("api-url").value = "helllo!";
 
+	//setup listeners for color changes
+	document.getElementById('highlight-color').onchange = function(){
+		let newColor = document.getElementById('highlight-color').value;
+		document.getElementById('inline-appearance').style.backgroundColor = newColor;
+	};
+
+	document.getElementById('text-color').onchange = function(){
+		let newColor = document.getElementById('text-color').value;
+		document.getElementById('inline-appearance').style.color = newColor;
+	};
+
+	//setup button listeners
 	document.getElementById('restore-defaults').onclick = restoreDefaults;
 
 	document.getElementById('settings-form').onsubmit = saveSettings;
@@ -103,6 +116,7 @@ function restoreDefaults(){
 	document.getElementById('api-url').value = DEFAULT_SETTINGS.API;
 	document.getElementById('api-port').value = DEFAULT_SETTINGS.PORT;
 	document.getElementById('highlight-color').value = DEFAULT_SETTINGS.HIGHLIGHT_COLOR;
+	document.getElementBYId('text-color').value = DEFAULT_SETTINGS.TEXT_COLOR;
 	document.getElementById('translation-hotkey').value = DEFAULT_SETTINGS.TRANSLATION_HOTKEY;
 	document.getElementById('source-language-select').value = DEFAULT_SETTINGS.SOURCE_LANG;
 	document.getElementById('target-language-select').value = DEFAULT_SETTINGS.TARGET_LANG;
@@ -131,6 +145,7 @@ function saveSettings(){
 		PORT : document.getElementById('api-port').value,
 		API_KEY : document.getElementById('api-key').value,
 		HIGHLIGHT_COLOR : document.getElementById('highlight-color').value,
+		TEXT_COLOR : document.getElementById('text-color').value,
 		TRANSLATION_HOTKEY : document.getElementById('translation-hotkey').value,
 		SOURCE_LANG : sourceLang,
 		TARGET_LANG : targetLang

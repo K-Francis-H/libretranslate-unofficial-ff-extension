@@ -143,7 +143,7 @@ document.body.onkeydown = function(edown){
 		.then( data => {
 			console.log(data);
 
-			let show = '<span style="background-color:'+settings.HIGHLIGHT_COLOR+';">'+data.translatedText+'</span>';
+			let show = '<span style="background-color:'+settings.HIGHLIGHT_COLOR+';color:'+settings.TEXT_COLOR+';">'+data.translatedText+'</span>';
 
 			//console.log(originalText);
 
