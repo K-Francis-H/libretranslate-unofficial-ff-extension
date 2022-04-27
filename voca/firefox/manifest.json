@@ -1,13 +1,14 @@
 {
 	"manifest_version": 2,
 	"name": "Unofficial LibreTranslate API",
-	"version": "0.2",
+	"version": "0.2.1",
 	"description": "in place translation to aid language learners with unfamiliar vocabulary",
 	"icons":{
 		"1048": "icons/libtrans_icon_1048_adjusted.png"
 	},
 	"content_scripts": [
 		{
+			"all_frames": true,
 			"matches": ["<all_urls>"],
 			"js": ["common.js", "content.js"]
 		}

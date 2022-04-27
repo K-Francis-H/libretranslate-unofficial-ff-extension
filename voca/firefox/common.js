@@ -1,6 +1,6 @@
 function getDefaultSettings(){
 	return {
-		API: "https://translate.argosopentech.com",
+		API: "https://translate.terraprint.co",
 		PORT: 443, //5000 is real default...
 		API_KEY: "",
 		HIGHLIGHT_COLOR: "#010101",
